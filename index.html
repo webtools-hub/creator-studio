@@ -3,147 +3,354 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CreatorStudio AI — YouTube & Content Suite</title>
+  <title>CreatorStudio AI — YouTube Creation & SEO Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --border: #30363d;
-      --accent: #238636;
-      --accent-hover: #2ea043;
-      --blue: #58a6ff;
-      --text: #f0f6fc;
-      --muted: #8b949e;
+      --bg: #07090e;
+      --card-bg: rgba(22, 27, 34, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary-gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 50%, #f43f5e 100%);
+      --accent: #6366f1;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-bg: rgba(15, 23, 42, 0.85);
+      --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; }
-    .container { max-width: 900px; margin: 0 auto; }
-    header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-    header h1 { font-size: 1.8rem; color: var(--text); }
-    header p { color: var(--muted); font-size: 0.95rem; }
-    .input-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; margin-bottom: 20px; }
-    label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
-    input[type="text"], textarea { width: 100%; background: #010409; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; color: var(--text); font-size: 0.95rem; margin-bottom: 14px; }
-    input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--blue); }
-    button { background: var(--accent); color: #fff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.95rem; width: 100%; }
-    button:hover { background: var(--accent-hover); }
-    .results-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 20px; }
-    @media(min-width: 768px) { .results-grid { grid-template-columns: 1fr 1fr; } }
-    .res-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-    .res-card h3 { font-size: 1rem; color: var(--blue); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-    .copy-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; width: auto; }
-    .copy-btn:hover { color: var(--text); border-color: var(--muted); }
-    .output-box { background: #010409; border: 1px solid var(--border); border-radius: 6px; padding: 10px; font-size: 0.85rem; color: var(--text); min-height: 100px; white-space: pre-wrap; word-break: break-word; }
-    canvas { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border); margin-top: 10px; }
-    footer { text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      background: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    .container { max-width: 960px; margin: 0 auto; }
+
+    header { text-align: center; margin-bottom: 24px; }
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #818cf8;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+    header p { color: var(--text-muted); font-size: 0.95rem; }
+
+    .control-panel {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+    .input-row { display: flex; flex-direction: column; gap: 10px; }
+    @media(min-width: 640px) { .input-row { flex-direction: row; } }
+
+    input[type="text"], select {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--accent); }
+
+    .btn-glow {
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-glow:hover { filter: brightness(1.1); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px; }
+    @media(min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+    .tool-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+    .tool-header { display: flex; justify-content: space-between; align-items: center; }
+    .tool-title { font-size: 0.95rem; font-weight: 700; }
+    
+    .copy-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .copy-chip:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+    .output-area {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      min-height: 110px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+
+    canvas { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--card-border); margin-top: 10px; }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
   </style>
 </head>
 <body>
+
   <div class="container">
     <header>
-      <h1>🚀 CreatorStudio AI</h1>
-      <p>High-CTR Titles, Video Scripts, SEO Tags & Thumbnail Canvas</p>
+      <span class="badge">🚀 Video SEO & Metadata Studio</span>
+      <h1>CreatorStudio AI</h1>
+      <p>High-CTR Titles, Smart Script Hooks, Description Templates & HD Thumbnails</p>
     </header>
 
-    <div class="input-card">
-      <label for="topicInput">Enter your video topic or core idea:</label>
-      <input type="text" id="topicInput" placeholder="e.g., Best Productivity Apps in 2026">
-      <button onclick="generateContent()">Generate Creator Pack</button>
+    <!-- Generator Input -->
+    <div class="control-panel">
+      <div class="input-row">
+        <input type="text" id="coreTopic" placeholder="Enter video topic (e.g. Best Productivity Tools in 2026)">
+        <button class="btn-glow" onclick="generateAll()">⚡ Generate Metadata Pack</button>
+      </div>
     </div>
 
-    <div class="results-grid">
-      <div class="res-card">
-        <h3>Viral Titles <button class="copy-btn" onclick="copyText('titleOutput')">Copy</button></h3>
-        <div class="output-box" id="titleOutput">Enter a topic and click Generate.</div>
+    <div class="grid-2">
+      <!-- Titles -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <span class="tool-title">🎯 High-CTR Titles</span>
+          <button class="copy-chip" onclick="copyBox('titleOut')">Copy</button>
+        </div>
+        <div class="output-area" id="titleOut">Enter a topic above to generate click-worthy titles.</div>
       </div>
 
-      <div class="res-card">
-        <h3>High-Retention Script Hook <button class="copy-btn" onclick="copyText('scriptOutput')">Copy</button></h3>
-        <div class="output-box" id="scriptOutput">Script breakdown will appear here.</div>
+      <!-- Script Hook -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <span class="tool-title">⚡ 30s Retention Hook Script</span>
+          <button class="copy-chip" onclick="copyBox('scriptOut')">Copy</button>
+        </div>
+        <div class="output-area" id="scriptOut">High-retention script outline will appear here.</div>
       </div>
 
-      <div class="res-card">
-        <h3>Ranked SEO Tags <button class="copy-btn" onclick="copyText('tagOutput')">Copy</button></h3>
-        <div class="output-box" id="tagOutput">Optimized tags will appear here.</div>
+      <!-- Tags & Hashtags -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <span class="tool-title">🏷️ SEO Tags & Hashtags</span>
+          <button class="copy-chip" onclick="copyBox('tagsOut')">Copy</button>
+        </div>
+        <div class="output-area" id="tagsOut">Optimized tags and hashtags will appear here.</div>
       </div>
 
-      <div class="res-card">
-        <h3>Thumbnail Generator</h3>
-        <canvas id="thumbCanvas" width="640" height="360"></canvas>
-        <button style="margin-top: 10px; background: #21262d; border: 1px solid var(--border);" onclick="downloadThumb()">Download Thumbnail</button>
+      <!-- Full Description Template -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <span class="tool-title">📝 Video Description & Timestamps</span>
+          <button class="copy-chip" onclick="copyBox('descOut')">Copy</button>
+        </div>
+        <div class="output-area" id="descOut">Formatted video description template will appear here.</div>
+      </div>
+    </div>
+
+    <!-- Media Utilities -->
+    <div class="grid-2">
+      <!-- HD Thumbnail Grabber -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <span class="tool-title">🖼️ YouTube Thumbnail Grabber</span>
+        </div>
+        <input type="text" id="ytUrl" placeholder="Paste YouTube video or Shorts URL">
+        <button class="btn-glow" style="width: 100%;" onclick="grabThumbnail()">Extract HD Thumbnail</button>
+        
+        <div id="grabResult" style="display: none; margin-top: 10px; text-align: center;">
+          <img id="grabbedImg" src="" style="width: 100%; border-radius: 6px; border: 1px solid var(--card-border); margin-bottom: 8px;" alt="Extracted Thumbnail">
+          <a id="hdDownloadLink" href="" target="_blank" download class="btn-glow" style="display: inline-block; text-decoration: none; font-size: 0.8rem; padding: 8px 16px;">Download 1080p Image</a>
+        </div>
+      </div>
+
+      <!-- Thumbnail Canvas -->
+      <div class="tool-card">
+        <div class="tool-header">
+          <span class="tool-title">🎨 Quick Cover Canvas</span>
+          <button class="copy-chip" onclick="downloadCanvas()">⬇️ Export PNG</button>
+        </div>
+        <input type="text" id="thumbText" value="YOUR TITLE HERE" oninput="drawCanvas()" placeholder="Cover text headline">
+        <canvas id="thumbCanvas" width="1280" height="720"></canvas>
       </div>
     </div>
 
     <footer>
-      <p>© 2026 CreatorStudio AI. All rights reserved.</p>
+      <p>© 2026 CreatorStudio AI • Fast Client-Side Content Utilities</p>
     </footer>
   </div>
 
   <script>
-    function generateContent() {
-      const topic = document.getElementById('topicInput').value.trim();
-      if (!topic) return;
+    function generateAll() {
+      const topic = document.getElementById('coreTopic').value.trim() || 'Grow Your Channel Fast in 2026';
 
-      document.getElementById('titleOutput').innerText = 
-        `1. I Tried ${topic} for 30 Days (Here's What Happened)\n` +
-        `2. Stop Doing ${topic} Wrong (3 Simple Rules)\n` +
-        `3. Why 99% Fail at ${topic} in 2026\n` +
-        `4. The Ultimate Guide to ${topic} (Step-by-Step)\n` +
+      // 1. Titles
+      document.getElementById('titleOut').innerText = 
+        `1. I Tested ${topic} for 30 Days (Here's What Happened)\n` +
+        `2. Why 99% of People Fail at ${topic} in 2026\n` +
+        `3. The Complete Blueprint to ${topic} (Step-by-Step)\n` +
+        `4. Stop Doing ${topic} Wrong (Do This Instead)\n` +
         `5. 5 Hidden Secrets of ${topic} Nobody Tells You`;
 
-      document.getElementById('scriptOutput').innerText = 
-        `[0:00 - 0:05 Hook]\n"Most people get ${topic} completely backwards. Today, I'm revealing the exact formula you need..."\n\n` +
-        `[0:05 - 0:25 Intro & Stakes]\n"If you want real results with ${topic}, here are the 3 major steps you must follow."\n\n` +
-        `[0:25+ Core Breakdown]\n"Step 1: Simplify your foundation..."`;
+      // 2. Script
+      document.getElementById('scriptOut').innerText = 
+        `[0:00 - 0:08 Hook]\n"Most creators get ${topic} completely backwards. Today, I'm revealing the exact framework you need to get results..."\n\n` +
+        `[0:08 - 0:25 Intro & Stakes]\n"If you avoid the two common pitfalls with ${topic}, you will save hours of trial and error."\n\n` +
+        `[0:25+ Core Strategy]\n"Step 1: Simplify your foundation..."`;
 
-      const baseTag = topic.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(' ').join(', ');
-      document.getElementById('tagOutput').innerText = 
-        `${topic}, ${topic} tutorial, ${topic} guide, how to ${topic}, best ${topic} 2026, ${baseTag}`;
+      // 3. Tags & Hashtags
+      const cleanWords = topic.replace(/[^a-zA-Z0-9 ]/g, '').split(' ');
+      const hashtags = cleanWords.map(w => `#${w}`).join(' ');
+      document.getElementById('tagsOut').innerText = 
+        `TAGS:\n${topic}, ${topic} tutorial, how to ${topic}, best ${topic} 2026, content strategy\n\n` +
+        `HASHTAGS:\n${hashtags} #YouTubeGrowth #ContentStrategy #Tutorial`;
 
-      renderThumbnail(topic);
+      // 4. Description
+      document.getElementById('descOut').innerText = 
+        `Everything you need to know about ${topic} in 2026.\n\n` +
+        `TIMESTAMPS:\n` +
+        `00:00 - Introduction & Hook\n` +
+        `01:15 - Core Mistakes to Avoid\n` +
+        `03:30 - Step-by-Step Walkthrough\n` +
+        `06:45 - Key Takeaways & Summary\n\n` +
+        `🔔 Subscribe for weekly creator tutorials!\n\n` +
+        `${hashtags} #Tutorial`;
+
+      // Sync canvas
+      document.getElementById('thumbText').value = topic.toUpperCase();
+      drawCanvas();
     }
 
-    function renderThumbnail(text) {
+    function drawCanvas() {
       const canvas = document.getElementById('thumbCanvas');
       const ctx = canvas.getContext('2d');
+      const text = document.getElementById('thumbText').value || "TITLE HERE";
 
-      ctx.fillStyle = '#0f172a';
+      // Dark gradient background
+      let grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, '#0a0f1d');
+      grad.addColorStop(1, '#020617');
+      ctx.fillStyle = grad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      // Red bottom accent bar
       ctx.fillStyle = '#ef4444';
-      ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+      ctx.fillRect(0, canvas.height - 30, canvas.width, 30);
 
+      // Top Tag
       ctx.fillStyle = '#38bdf8';
-      ctx.font = 'bold 36px sans-serif';
+      ctx.font = "700 48px 'Bebas Neue', sans-serif";
       ctx.textAlign = 'center';
-      ctx.fillText("DON'T MISS THIS", canvas.width / 2, 90);
+      ctx.fillText("DON'T MISS THIS", canvas.width / 2, 190);
 
+      // Main Text
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 48px sans-serif';
-      const cleanText = text.length > 22 ? text.substring(0, 20) + "..." : text;
-      ctx.fillText(cleanText.toUpperCase(), canvas.width / 2, 190);
+      let fontSize = text.length > 22 ? 72 : 92;
+      ctx.font = `900 ${fontSize}px 'Bebas Neue', sans-serif`;
 
+      const words = text.toUpperCase().split(' ');
+      if (words.length > 3) {
+        const mid = Math.ceil(words.length / 2);
+        ctx.fillText(words.slice(0, mid).join(' '), canvas.width / 2, 350);
+        ctx.fillText(words.slice(mid).join(' '), canvas.width / 2, 460);
+      } else {
+        ctx.fillText(text.toUpperCase(), canvas.width / 2, 400);
+      }
+
+      // Yellow badge
       ctx.fillStyle = '#facc15';
-      ctx.font = 'bold 32px sans-serif';
-      ctx.fillText("STEP-BY-STEP (2026)", canvas.width / 2, 280);
+      ctx.font = "700 36px 'Bebas Neue', sans-serif";
+      ctx.fillText("⭐ 2026 EDITION ⭐", canvas.width / 2, 570);
     }
 
-    function copyText(elementId) {
-      const text = document.getElementById(elementId).innerText;
-      navigator.clipboard.writeText(text);
+    function grabThumbnail() {
+      const url = document.getElementById('ytUrl').value.trim();
+      let videoId = '';
+      if (url.includes('v=')) {
+        videoId = url.split('v=')[1].split('&')[0];
+      } else if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0];
+      } else if (url.includes('shorts/')) {
+        videoId = url.split('shorts/')[1].split('?')[0];
+      }
+
+      if (videoId) {
+        const imgUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+        document.getElementById('grabbedImg').src = imgUrl;
+        document.getElementById('hdDownloadLink').href = imgUrl;
+        document.getElementById('grabResult').style.display = 'block';
+      } else {
+        alert('Please enter a valid YouTube or Shorts link.');
+      }
+    }
+
+    function copyBox(id) {
+      navigator.clipboard.writeText(document.getElementById(id).innerText);
       alert('Copied to clipboard!');
     }
 
-    function downloadThumb() {
+    function downloadCanvas() {
       const canvas = document.getElementById('thumbCanvas');
-      const link = document.createElement('a');
-      link.download = 'thumbnail.png';
-      link.href = canvas.toDataURL();
-      link.click();
+      const a = document.createElement('a');
+      a.download = 'youtube-thumbnail.png';
+      a.href = canvas.toDataURL();
+      a.click();
     }
 
     window.onload = function() {
-      renderThumbnail("YOUR TITLE HERE");
+      drawCanvas();
     };
   </script>
 </body>
