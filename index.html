@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreatorStudio AI — YouTube & Content Suite</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --accent: #238636;
+      --accent-hover: #2ea043;
+      --blue: #58a6ff;
+      --text: #f0f6fc;
+      --muted: #8b949e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    header h1 { font-size: 1.8rem; color: var(--text); }
+    header p { color: var(--muted); font-size: 0.95rem; }
+    .input-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 18px; margin-bottom: 20px; }
+    label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; }
+    input[type="text"], textarea { width: 100%; background: #010409; border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; color: var(--text); font-size: 0.95rem; margin-bottom: 14px; }
+    input[type="text"]:focus, textarea:focus { outline: none; border-color: var(--blue); }
+    button { background: var(--accent); color: #fff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.95rem; width: 100%; }
+    button:hover { background: var(--accent-hover); }
+    .results-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 20px; }
+    @media(min-width: 768px) { .results-grid { grid-template-columns: 1fr 1fr; } }
+    .res-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .res-card h3 { font-size: 1rem; color: var(--blue); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .copy-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; width: auto; }
+    .copy-btn:hover { color: var(--text); border-color: var(--muted); }
+    .output-box { background: #010409; border: 1px solid var(--border); border-radius: 6px; padding: 10px; font-size: 0.85rem; color: var(--text); min-height: 100px; white-space: pre-wrap; word-break: break-word; }
+    canvas { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--border); margin-top: 10px; }
+    footer { text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🚀 CreatorStudio AI</h1>
+      <p>High-CTR Titles, Video Scripts, SEO Tags & Thumbnail Canvas</p>
+    </header>
+
+    <div class="input-card">
+      <label for="topicInput">Enter your video topic or core idea:</label>
+      <input type="text" id="topicInput" placeholder="e.g., Best Productivity Apps in 2026">
+      <button onclick="generateContent()">Generate Creator Pack</button>
+    </div>
+
+    <div class="results-grid">
+      <div class="res-card">
+        <h3>Viral Titles <button class="copy-btn" onclick="copyText('titleOutput')">Copy</button></h3>
+        <div class="output-box" id="titleOutput">Enter a topic and click Generate.</div>
+      </div>
+
+      <div class="res-card">
+        <h3>High-Retention Script Hook <button class="copy-btn" onclick="copyText('scriptOutput')">Copy</button></h3>
+        <div class="output-box" id="scriptOutput">Script breakdown will appear here.</div>
+      </div>
+
+      <div class="res-card">
+        <h3>Ranked SEO Tags <button class="copy-btn" onclick="copyText('tagOutput')">Copy</button></h3>
+        <div class="output-box" id="tagOutput">Optimized tags will appear here.</div>
+      </div>
+
+      <div class="res-card">
+        <h3>Thumbnail Generator</h3>
+        <canvas id="thumbCanvas" width="640" height="360"></canvas>
+        <button style="margin-top: 10px; background: #21262d; border: 1px solid var(--border);" onclick="downloadThumb()">Download Thumbnail</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2026 CreatorStudio AI. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function generateContent() {
+      const topic = document.getElementById('topicInput').value.trim();
+      if (!topic) return;
+
+      document.getElementById('titleOutput').innerText = 
+        `1. I Tried ${topic} for 30 Days (Here's What Happened)\n` +
+        `2. Stop Doing ${topic} Wrong (3 Simple Rules)\n` +
+        `3. Why 99% Fail at ${topic} in 2026\n` +
+        `4. The Ultimate Guide to ${topic} (Step-by-Step)\n` +
+        `5. 5 Hidden Secrets of ${topic} Nobody Tells You`;
+
+      document.getElementById('scriptOutput').innerText = 
+        `[0:00 - 0:05 Hook]\n"Most people get ${topic} completely backwards. Today, I'm revealing the exact formula you need..."\n\n` +
+        `[0:05 - 0:25 Intro & Stakes]\n"If you want real results with ${topic}, here are the 3 major steps you must follow."\n\n` +
+        `[0:25+ Core Breakdown]\n"Step 1: Simplify your foundation..."`;
+
+      const baseTag = topic.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(' ').join(', ');
+      document.getElementById('tagOutput').innerText = 
+        `${topic}, ${topic} tutorial, ${topic} guide, how to ${topic}, best ${topic} 2026, ${baseTag}`;
+
+      renderThumbnail(topic);
+    }
+
+    function renderThumbnail(text) {
+      const canvas = document.getElementById('thumbCanvas');
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = 'bold 36px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText("DON'T MISS THIS", canvas.width / 2, 90);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 48px sans-serif';
+      const cleanText = text.length > 22 ? text.substring(0, 20) + "..." : text;
+      ctx.fillText(cleanText.toUpperCase(), canvas.width / 2, 190);
+
+      ctx.fillStyle = '#facc15';
+      ctx.font = 'bold 32px sans-serif';
+      ctx.fillText("STEP-BY-STEP (2026)", canvas.width / 2, 280);
+    }
+
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text);
+      alert('Copied to clipboard!');
+    }
+
+    function downloadThumb() {
+      const canvas = document.getElementById('thumbCanvas');
+      const link = document.createElement('a');
+      link.download = 'thumbnail.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+
+    window.onload = function() {
+      renderThumbnail("YOUR TITLE HERE");
+    };
+  </script>
+</body>
+</html>
