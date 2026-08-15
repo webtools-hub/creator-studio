@@ -3,10 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CreatorStudio AI — YouTube Creation & SEO Suite</title>
+
+  <!-- Primary SEO Meta Tags -->
+  <title>CreatorStudio AI — Free YouTube SEO, Title Generator & Thumbnail Studio</title>
+  <meta name="description" content="Generate high-CTR YouTube titles, 30-second retention hooks, SEO tags, video descriptions, and HD viral thumbnails instantly. Free, fast, and no login required.">
+  <meta name="keywords" content="YouTube title generator, YouTube tag generator, YouTube thumbnail downloader, video script hooks, high CTR thumbnails, creator tools 2026">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://webtools-hub.github.io/creator-studio/">
+
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webtools-hub.github.io/creator-studio/">
+  <meta property="og:title" content="CreatorStudio AI — YouTube Growth & Metadata Suite">
+  <meta property="og:description" content="Instant High-CTR Titles, Script Hooks, Viral Tags, Description Templates & HD Thumbnails in one click.">
+
+  <!-- Google Rich Snippet Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "CreatorStudio AI",
+        "url": "https://webtools-hub.github.io/creator-studio/",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Free web-based tool suite for YouTube creators to generate titles, script hooks, SEO tags, and custom thumbnails."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is the optimal size for a YouTube thumbnail?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The optimal YouTube thumbnail resolution is 1280x720 pixels (16:9 aspect ratio) with a minimum width of 640 pixels."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you write high-CTR YouTube titles?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "High-CTR titles keep the main keyword near the beginning, stay under 60 characters for mobile display, and use curiosity loops or high-stakes phrasing."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07090e;
@@ -31,7 +88,7 @@
       padding: 24px 16px;
     }
 
-    .container { max-width: 960px; margin: 0 auto; }
+    .container { max-width: 980px; margin: 0 auto; }
 
     header { text-align: center; margin-bottom: 24px; }
     .badge {
@@ -134,7 +191,20 @@
       line-height: 1.5;
     }
 
-    canvas { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--card-border); margin-top: 10px; }
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    canvas { 
+      width: 100%; 
+      height: auto; 
+      border-radius: 8px; 
+      border: 1px solid var(--card-border); 
+      margin-top: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
 
     footer {
       text-align: center;
@@ -149,19 +219,20 @@
 
   <div class="container">
     <header>
-      <span class="badge">🚀 Video SEO & Metadata Studio</span>
+      <span class="badge">⚡ Viral Creator Engine</span>
       <h1>CreatorStudio AI</h1>
-      <p>High-CTR Titles, Smart Script Hooks, Description Templates & HD Thumbnails</p>
+      <p>High-CTR Titles, Retention Scripts, SEO Tags & High-Impact Visual Studio</p>
     </header>
 
     <!-- Generator Input -->
     <div class="control-panel">
       <div class="input-row">
-        <input type="text" id="coreTopic" placeholder="Enter video topic (e.g. Best Productivity Tools in 2026)">
-        <button class="btn-glow" onclick="generateAll()">⚡ Generate Metadata Pack</button>
+        <input type="text" id="coreTopic" placeholder="Enter video topic (e.g. 5 AI Secrets to 100K Subs)">
+        <button class="btn-glow" onclick="generateAll()">⚡ Generate Strategy Pack</button>
       </div>
     </div>
 
+    <!-- Output Cards -->
     <div class="grid-2">
       <!-- Titles -->
       <div class="tool-card">
@@ -216,13 +287,29 @@
         </div>
       </div>
 
-      <!-- Thumbnail Canvas -->
+      <!-- High-CTR Pro Canvas Studio -->
       <div class="tool-card">
         <div class="tool-header">
-          <span class="tool-title">🎨 Quick Cover Canvas</span>
+          <span class="tool-title">🎨 High-CTR Visual Studio</span>
           <button class="copy-chip" onclick="downloadCanvas()">⬇️ Export PNG</button>
         </div>
-        <input type="text" id="thumbText" value="YOUR TITLE HERE" oninput="drawCanvas()" placeholder="Cover text headline">
+        
+        <div class="controls-grid">
+          <div>
+            <input type="text" id="badgeText" value="DON'T DO THIS" oninput="drawCanvas()" placeholder="Top Pill Badge">
+          </div>
+          <div>
+            <select id="themeSelect" onchange="drawCanvas()">
+              <option value="dark-crimson">🔥 Crimson Alert</option>
+              <option value="cyber-blue">⚡ Cyber Blue</option>
+              <option value="neon-matrix">🟢 Neon Emerald</option>
+              <option value="purple-haze">🔮 Ultra Purple</option>
+            </select>
+          </div>
+        </div>
+
+        <input type="text" id="thumbText" value="NEW SECRET (2026)" oninput="drawCanvas()" placeholder="Main Headline">
+        
         <canvas id="thumbCanvas" width="1280" height="720"></canvas>
       </div>
     </div>
@@ -238,7 +325,7 @@
 
       // 1. Titles
       document.getElementById('titleOut').innerText = 
-        `1. I Tested ${topic} for 30 Days (Here's What Happened)\n` +
+        `1. I Tested ${topic} for 30 Days (Real Results)\n` +
         `2. Why 99% of People Fail at ${topic} in 2026\n` +
         `3. The Complete Blueprint to ${topic} (Step-by-Step)\n` +
         `4. Stop Doing ${topic} Wrong (Do This Instead)\n` +
@@ -276,43 +363,114 @@
     function drawCanvas() {
       const canvas = document.getElementById('thumbCanvas');
       const ctx = canvas.getContext('2d');
-      const text = document.getElementById('thumbText').value || "TITLE HERE";
+      const headline = document.getElementById('thumbText').value || "HEADLINE HERE";
+      const badge = document.getElementById('badgeText').value || "ALERT";
+      const theme = document.getElementById('themeSelect').value;
 
-      // Dark gradient background
+      // Theme Palettes
+      let bgGrad, glowColor, badgeBg, badgeColor, subColor;
+      if (theme === 'dark-crimson') {
+        bgGrad = ['#1a0507', '#050102'];
+        glowColor = '#ef4444';
+        badgeBg = '#ef4444';
+        badgeColor = '#ffffff';
+        subColor = '#facc15';
+      } else if (theme === 'cyber-blue') {
+        bgGrad = ['#08162e', '#020612'];
+        glowColor = '#06b6d4';
+        badgeBg = '#0284c7';
+        badgeColor = '#ffffff';
+        subColor = '#38bdf8';
+      } else if (theme === 'neon-matrix') {
+        bgGrad = ['#042017', '#010906'];
+        glowColor = '#10b981';
+        badgeBg = '#10b981';
+        badgeColor = '#021f15';
+        subColor = '#4ade80';
+      } else {
+        bgGrad = ['#200938', '#07020d'];
+        glowColor = '#a855f7';
+        badgeBg = '#9333ea';
+        badgeColor = '#ffffff';
+        subColor = '#f472b6';
+      }
+
+      // Background Gradient
       let grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0, '#0a0f1d');
-      grad.addColorStop(1, '#020617');
+      grad.addColorStop(0, bgGrad[0]);
+      grad.addColorStop(1, bgGrad[1]);
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Red bottom accent bar
-      ctx.fillStyle = '#ef4444';
-      ctx.fillRect(0, canvas.height - 30, canvas.width, 30);
+      // Dynamic Corner Lighting Glow
+      ctx.save();
+      let radialGlow = ctx.createRadialGradient(canvas.width * 0.85, canvas.height * 0.15, 20, canvas.width * 0.85, canvas.height * 0.15, 550);
+      radialGlow.addColorStop(0, glowColor + '55');
+      radialGlow.addColorStop(1, 'transparent');
+      ctx.fillStyle = radialGlow;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.restore();
 
-      // Top Tag
-      ctx.fillStyle = '#38bdf8';
-      ctx.font = "700 48px 'Bebas Neue', sans-serif";
+      // Top High-Contrast Pill Badge
+      ctx.save();
+      ctx.font = "800 36px 'Montserrat', sans-serif";
+      let badgeWidth = ctx.measureText(badge.toUpperCase()).width + 60;
+      let badgeX = (canvas.width - badgeWidth) / 2;
+      let badgeY = 110;
+      
+      // Badge Background Shadow & Shape
+      ctx.fillStyle = badgeBg;
+      ctx.shadowColor = glowColor;
+      ctx.shadowBlur = 30;
+      ctx.roundRect(badgeX, badgeY, badgeWidth, 64, 32);
+      ctx.fill();
+
+      // Badge Text
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = badgeColor;
       ctx.textAlign = 'center';
-      ctx.fillText("DON'T MISS THIS", canvas.width / 2, 190);
+      ctx.fillText(badge.toUpperCase(), canvas.width / 2, badgeY + 45);
+      ctx.restore();
 
-      // Main Text
-      ctx.fillStyle = '#ffffff';
-      let fontSize = text.length > 22 ? 72 : 92;
-      ctx.font = `900 ${fontSize}px 'Bebas Neue', sans-serif`;
-
-      const words = text.toUpperCase().split(' ');
-      if (words.length > 3) {
-        const mid = Math.ceil(words.length / 2);
-        ctx.fillText(words.slice(0, mid).join(' '), canvas.width / 2, 350);
-        ctx.fillText(words.slice(mid).join(' '), canvas.width / 2, 460);
+      // Main Headline with Thick Black Stroke & Multi-line Support
+      ctx.save();
+      ctx.textAlign = 'center';
+      let words = headline.toUpperCase().split(' ');
+      let lines = [];
+      if (words.length > 4) {
+        let mid = Math.ceil(words.length / 2);
+        lines.push(words.slice(0, mid).join(' '));
+        lines.push(words.slice(mid).join(' '));
       } else {
-        ctx.fillText(text.toUpperCase(), canvas.width / 2, 400);
+        lines.push(words.join(' '));
       }
 
-      // Yellow badge
-      ctx.fillStyle = '#facc15';
-      ctx.font = "700 36px 'Bebas Neue', sans-serif";
-      ctx.fillText("⭐ 2026 EDITION ⭐", canvas.width / 2, 570);
+      let fontSize = lines.length > 1 ? 84 : 106;
+      ctx.font = `900 ${fontSize}px 'Montserrat', sans-serif`;
+      let startY = lines.length > 1 ? 340 : 380;
+
+      lines.forEach((line, index) => {
+        let yPos = startY + (index * (fontSize + 16));
+
+        // Heavy Drop Shadow + Stroke for ultra readability
+        ctx.shadowColor = '#000000';
+        ctx.shadowBlur = 24;
+        ctx.shadowOffsetX = 6;
+        ctx.shadowOffsetY = 6;
+
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 14;
+        ctx.strokeText(line, canvas.width / 2, yPos);
+
+        // Highlight alternate line color
+        ctx.fillStyle = index === 0 ? '#ffffff' : subColor;
+        ctx.fillText(line, canvas.width / 2, yPos);
+      });
+      ctx.restore();
+
+      // Bottom High-CTR Accent Bar
+      ctx.fillStyle = badgeBg;
+      ctx.fillRect(0, canvas.height - 24, canvas.width, 24);
     }
 
     function grabThumbnail() {
@@ -344,8 +502,8 @@
     function downloadCanvas() {
       const canvas = document.getElementById('thumbCanvas');
       const a = document.createElement('a');
-      a.download = 'youtube-thumbnail.png';
-      a.href = canvas.toDataURL();
+      a.download = 'high-ctr-thumbnail.png';
+      a.href = canvas.toDataURL('image/png');
       a.click();
     }
 
