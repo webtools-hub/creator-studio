@@ -51,7 +51,7 @@
             "name": "How do you write high-CTR YouTube titles?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "High-CTR titles keep the main keyword near the beginning, stay under 60 characters for mobile display, and use curiosity loops or high-stakes phrasing."
+              "text": "High-CTR titles keep the main keyword near the beginning, stay under 60 characters for mobile display, and use strong curiosity or emotional triggers."
             }
           }
         ]
@@ -64,6 +64,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #07090e;
@@ -85,10 +86,9 @@
         radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%);
       color: var(--text-main);
       min-height: 100vh;
-      padding: 24px 16px;
     }
 
-    .container { max-width: 980px; margin: 0 auto; }
+    .container { max-width: 980px; margin: 0 auto; padding: 24px 16px; }
 
     header { text-align: center; margin-bottom: 24px; }
     .badge {
@@ -165,7 +165,7 @@
     }
     .tool-header { display: flex; justify-content: space-between; align-items: center; }
     .tool-title { font-size: 0.95rem; font-weight: 700; }
-    
+
     .copy-chip {
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--card-border);
@@ -191,17 +191,13 @@
       line-height: 1.5;
     }
 
-    .controls-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
+    .controls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-    canvas { 
-      width: 100%; 
-      height: auto; 
-      border-radius: 8px; 
-      border: 1px solid var(--card-border); 
+    canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
       margin-top: 10px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
@@ -217,6 +213,12 @@
 </head>
 <body>
 
+  <!-- Cross-Navigation Header -->
+  <div style="background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(8px);">
+    <span style="font-weight: 800; color: #6366f1; letter-spacing: 0.5px;">⚡ WEBTOOLS HUB</span>
+    <a href="https://webtools-hub.github.io/faceless-studio/" style="color: #34d399; text-decoration: none; font-weight: 700; background: rgba(16, 185, 129, 0.12); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">Try FacelessStudio AI ↗</a>
+  </div>
+
   <div class="container">
     <header>
       <span class="badge">⚡ Viral Creator Engine</span>
@@ -227,288 +229,192 @@
     <!-- Generator Input -->
     <div class="control-panel">
       <div class="input-row">
-        <input type="text" id="coreTopic" placeholder="Enter video topic (e.g. 5 AI Secrets to 100K Subs)">
+        <input type="text" id="coreTopic" placeholder="Enter video topic (e.g. 5 AI Secrets to 100K Subs)" value="5 AI Secrets to 100K Subs">
         <button class="btn-glow" onclick="generateAll()">⚡ Generate Strategy Pack</button>
       </div>
     </div>
 
-    <!-- Output Cards -->
+    <!-- Strategy Tool Grid -->
     <div class="grid-2">
-      <!-- Titles -->
+      <!-- High CTR Titles -->
       <div class="tool-card">
         <div class="tool-header">
-          <span class="tool-title">🎯 High-CTR Titles</span>
+          <span class="tool-title">🔥 High-CTR Viral Titles</span>
           <button class="copy-chip" onclick="copyBox('titleOut')">Copy</button>
         </div>
-        <div class="output-area" id="titleOut">Enter a topic above to generate click-worthy titles.</div>
+        <div class="output-area" id="titleOut"></div>
       </div>
 
-      <!-- Script Hook -->
+      <!-- 30s Retention Hook Script -->
       <div class="tool-card">
         <div class="tool-header">
-          <span class="tool-title">⚡ 30s Retention Hook Script</span>
+          <span class="tool-title">⏱️ 30s Retention Hook Script</span>
           <button class="copy-chip" onclick="copyBox('scriptOut')">Copy</button>
         </div>
-        <div class="output-area" id="scriptOut">High-retention script outline will appear here.</div>
+        <div class="output-area" id="scriptOut"></div>
       </div>
 
-      <!-- Tags & Hashtags -->
+      <!-- SEO Viral Tags -->
       <div class="tool-card">
         <div class="tool-header">
-          <span class="tool-title">🏷️ SEO Tags & Hashtags</span>
+          <span class="tool-title">🏷️ Targeted SEO Tags</span>
           <button class="copy-chip" onclick="copyBox('tagsOut')">Copy</button>
         </div>
-        <div class="output-area" id="tagsOut">Optimized tags and hashtags will appear here.</div>
+        <div class="output-area" id="tagsOut"></div>
       </div>
 
-      <!-- Full Description Template -->
+      <!-- Optimized Description & Timestamps -->
       <div class="tool-card">
         <div class="tool-header">
-          <span class="tool-title">📝 Video Description & Timestamps</span>
+          <span class="tool-title">📝 Video Description & Chapters</span>
           <button class="copy-chip" onclick="copyBox('descOut')">Copy</button>
         </div>
-        <div class="output-area" id="descOut">Formatted video description template will appear here.</div>
+        <div class="output-area" id="descOut"></div>
       </div>
     </div>
 
-    <!-- Media Utilities -->
-    <div class="grid-2">
-      <!-- HD Thumbnail Grabber -->
-      <div class="tool-card">
-        <div class="tool-header">
-          <span class="tool-title">🖼️ YouTube Thumbnail Grabber</span>
-        </div>
-        <input type="text" id="ytUrl" placeholder="Paste YouTube video or Shorts URL">
-        <button class="btn-glow" style="width: 100%;" onclick="grabThumbnail()">Extract HD Thumbnail</button>
-        
-        <div id="grabResult" style="display: none; margin-top: 10px; text-align: center;">
-          <img id="grabbedImg" src="" style="width: 100%; border-radius: 6px; border: 1px solid var(--card-border); margin-bottom: 8px;" alt="Extracted Thumbnail">
-          <a id="hdDownloadLink" href="" target="_blank" download class="btn-glow" style="display: inline-block; text-decoration: none; font-size: 0.8rem; padding: 8px 16px;">Download 1080p Image</a>
-        </div>
+    <!-- Visual Thumbnail Designer -->
+    <div class="tool-card" style="margin-bottom: 24px;">
+      <div class="tool-header">
+        <span class="tool-title">🎨 Viral 4K Canvas Studio</span>
+        <button class="btn-glow" style="padding: 6px 14px; font-size: 0.8rem;" onclick="downloadThumbnail()">⬇ Download 1280x720 PNG</button>
       </div>
-
-      <!-- High-CTR Pro Canvas Studio -->
-      <div class="tool-card">
-        <div class="tool-header">
-          <span class="tool-title">🎨 High-CTR Visual Studio</span>
-          <button class="copy-chip" onclick="downloadCanvas()">⬇️ Export PNG</button>
-        </div>
-        
-        <div class="controls-grid">
-          <div>
-            <input type="text" id="badgeText" value="DON'T DO THIS" oninput="drawCanvas()" placeholder="Top Pill Badge">
-          </div>
-          <div>
-            <select id="themeSelect" onchange="drawCanvas()">
-              <option value="dark-crimson">🔥 Crimson Alert</option>
-              <option value="cyber-blue">⚡ Cyber Blue</option>
-              <option value="neon-matrix">🟢 Neon Emerald</option>
-              <option value="purple-haze">🔮 Ultra Purple</option>
-            </select>
-          </div>
-        </div>
-
-        <input type="text" id="thumbText" value="NEW SECRET (2026)" oninput="drawCanvas()" placeholder="Main Headline">
-        
-        <canvas id="thumbCanvas" width="1280" height="720"></canvas>
+      <div class="controls-grid">
+        <input type="text" id="thumbTextMain" placeholder="Bold Header (e.g. NEVER DO THIS)" value="NEVER DO THIS" oninput="renderCanvas()">
+        <input type="text" id="thumbTextSub" placeholder="Sub Header (e.g. IN 2026)" value="IN 2026" oninput="renderCanvas()">
       </div>
+      <div class="controls-grid">
+        <select id="canvasTheme" onchange="renderCanvas()">
+          <option value="crimson">🔥 Crimson Danger</option>
+          <option value="cyber">⚡ Cyber Neon</option>
+          <option value="gold">💰 Luxury Gold</option>
+          <option value="emerald">🟢 Emerald Growth</option>
+        </select>
+        <select id="badgeSelect" onchange="renderCanvas()">
+          <option value="WARNING">Badge: WARNING</option>
+          <option value="SECRET">Badge: SECRET</option>
+          <option value="100X">Badge: 100X</option>
+          <option value="FREE">Badge: 100% FREE</option>
+        </select>
+      </div>
+      <canvas id="thumbCanvas" width="1280" height="720"></canvas>
     </div>
 
     <footer>
-      <p>© 2026 CreatorStudio AI • Fast Client-Side Content Utilities</p>
+      <p>© 2026 CreatorStudio AI • Built for fast creator workflows</p>
     </footer>
   </div>
 
   <script>
     function generateAll() {
-      const topic = document.getElementById('coreTopic').value.trim() || 'Grow Your Channel Fast in 2026';
-
-      // 1. Titles
-      document.getElementById('titleOut').innerText = 
-        `1. I Tested ${topic} for 30 Days (Real Results)\n` +
-        `2. Why 99% of People Fail at ${topic} in 2026\n` +
-        `3. The Complete Blueprint to ${topic} (Step-by-Step)\n` +
-        `4. Stop Doing ${topic} Wrong (Do This Instead)\n` +
-        `5. 5 Hidden Secrets of ${topic} Nobody Tells You`;
-
-      // 2. Script
-      document.getElementById('scriptOut').innerText = 
-        `[0:00 - 0:08 Hook]\n"Most creators get ${topic} completely backwards. Today, I'm revealing the exact framework you need to get results..."\n\n` +
-        `[0:08 - 0:25 Intro & Stakes]\n"If you avoid the two common pitfalls with ${topic}, you will save hours of trial and error."\n\n` +
-        `[0:25+ Core Strategy]\n"Step 1: Simplify your foundation..."`;
-
-      // 3. Tags & Hashtags
-      const cleanWords = topic.replace(/[^a-zA-Z0-9 ]/g, '').split(' ');
-      const hashtags = cleanWords.map(w => `#${w}`).join(' ');
-      document.getElementById('tagsOut').innerText = 
-        `TAGS:\n${topic}, ${topic} tutorial, how to ${topic}, best ${topic} 2026, content strategy\n\n` +
-        `HASHTAGS:\n${hashtags} #YouTubeGrowth #ContentStrategy #Tutorial`;
-
-      // 4. Description
-      document.getElementById('descOut').innerText = 
-        `Everything you need to know about ${topic} in 2026.\n\n` +
-        `TIMESTAMPS:\n` +
-        `00:00 - Introduction & Hook\n` +
-        `01:15 - Core Mistakes to Avoid\n` +
-        `03:30 - Step-by-Step Walkthrough\n` +
-        `06:45 - Key Takeaways & Summary\n\n` +
-        `🔔 Subscribe for weekly creator tutorials!\n\n` +
-        `${hashtags} #Tutorial`;
-
-      // Sync canvas
-      document.getElementById('thumbText').value = topic.toUpperCase();
-      drawCanvas();
-    }
-
-    function drawCanvas() {
-      const canvas = document.getElementById('thumbCanvas');
-      const ctx = canvas.getContext('2d');
-      const headline = document.getElementById('thumbText').value || "HEADLINE HERE";
-      const badge = document.getElementById('badgeText').value || "ALERT";
-      const theme = document.getElementById('themeSelect').value;
-
-      // Theme Palettes
-      let bgGrad, glowColor, badgeBg, badgeColor, subColor;
-      if (theme === 'dark-crimson') {
-        bgGrad = ['#1a0507', '#050102'];
-        glowColor = '#ef4444';
-        badgeBg = '#ef4444';
-        badgeColor = '#ffffff';
-        subColor = '#facc15';
-      } else if (theme === 'cyber-blue') {
-        bgGrad = ['#08162e', '#020612'];
-        glowColor = '#06b6d4';
-        badgeBg = '#0284c7';
-        badgeColor = '#ffffff';
-        subColor = '#38bdf8';
-      } else if (theme === 'neon-matrix') {
-        bgGrad = ['#042017', '#010906'];
-        glowColor = '#10b981';
-        badgeBg = '#10b981';
-        badgeColor = '#021f15';
-        subColor = '#4ade80';
-      } else {
-        bgGrad = ['#200938', '#07020d'];
-        glowColor = '#a855f7';
-        badgeBg = '#9333ea';
-        badgeColor = '#ffffff';
-        subColor = '#f472b6';
-      }
-
-      // Background Gradient
-      let grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      grad.addColorStop(0, bgGrad[0]);
-      grad.addColorStop(1, bgGrad[1]);
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      // Dynamic Corner Lighting Glow
-      ctx.save();
-      let radialGlow = ctx.createRadialGradient(canvas.width * 0.85, canvas.height * 0.15, 20, canvas.width * 0.85, canvas.height * 0.15, 550);
-      radialGlow.addColorStop(0, glowColor + '55');
-      radialGlow.addColorStop(1, 'transparent');
-      ctx.fillStyle = radialGlow;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.restore();
-
-      // Top High-Contrast Pill Badge
-      ctx.save();
-      ctx.font = "800 36px 'Montserrat', sans-serif";
-      let badgeWidth = ctx.measureText(badge.toUpperCase()).width + 60;
-      let badgeX = (canvas.width - badgeWidth) / 2;
-      let badgeY = 110;
+      const topic = document.getElementById('coreTopic').value.trim() || 'Grow Fast in 2026';
       
-      // Badge Background Shadow & Shape
-      ctx.fillStyle = badgeBg;
-      ctx.shadowColor = glowColor;
-      ctx.shadowBlur = 30;
-      ctx.roundRect(badgeX, badgeY, badgeWidth, 64, 32);
-      ctx.fill();
+      // Titles
+      const titles = [
+        `1. I Tested ${topic} So You Don't Have To`,
+        `2. Why 99% of People Fail At ${topic} (Real Fix)`,
+        `3. Do NOT Ignore ${topic} (Before It's Too Late)`,
+        `4. The Secret Guide To ${topic} Nobody Talks About`,
+        `5. How To Master ${topic} In Under 10 Minutes`
+      ].join('\n');
+      document.getElementById('titleOut').innerText = titles;
 
-      // Badge Text
-      ctx.shadowBlur = 0;
-      ctx.fillStyle = badgeColor;
-      ctx.textAlign = 'center';
-      ctx.fillText(badge.toUpperCase(), canvas.width / 2, badgeY + 45);
-      ctx.restore();
+      // Retention Hook Script
+      const script = `[0:00 - 0:03] Stop scrolling. If you are struggling with ${topic}, you are making one crucial mistake.\n\n[0:03 - 0:15] Most creators do this backwards and lose 90% of their results. Here is the exact 3-step formula you need right now.\n\n[0:15 - 0:30] Step 1: Execute first before optimizing. Hit like, subscribe, and follow for the full breakdown.`;
+      document.getElementById('scriptOut').innerText = script;
 
-      // Main Headline with Thick Black Stroke & Multi-line Support
-      ctx.save();
-      ctx.textAlign = 'center';
-      let words = headline.toUpperCase().split(' ');
-      let lines = [];
-      if (words.length > 4) {
-        let mid = Math.ceil(words.length / 2);
-        lines.push(words.slice(0, mid).join(' '));
-        lines.push(words.slice(mid).join(' '));
-      } else {
-        lines.push(words.join(' '));
-      }
+      // Tags
+      const clean = topic.toLowerCase().replace(/[^a-z0-9 ]/g, '');
+      const tags = `${clean}, ${clean} guide, how to ${clean}, ${clean} tutorial, ${clean} tips, ${clean} 2026, ${clean} strategy, viral youtube growth`;
+      document.getElementById('tagsOut').innerText = tags;
 
-      let fontSize = lines.length > 1 ? 84 : 106;
-      ctx.font = `900 ${fontSize}px 'Montserrat', sans-serif`;
-      let startY = lines.length > 1 ? 340 : 380;
+      // Description
+      const desc = `In this video, we break down everything you need to know about ${topic}.\n\n📌 Timestamps:\n0:00 - Introduction to ${topic}\n0:45 - The Fatal Mistake\n02:15 - Step-by-Step Blueprint\n05:30 - Final Pro Tip\n\n🔔 Subscribe for weekly growth frameworks!`;
+      document.getElementById('descOut').innerText = desc;
 
-      lines.forEach((line, index) => {
-        let yPos = startY + (index * (fontSize + 16));
-
-        // Heavy Drop Shadow + Stroke for ultra readability
-        ctx.shadowColor = '#000000';
-        ctx.shadowBlur = 24;
-        ctx.shadowOffsetX = 6;
-        ctx.shadowOffsetY = 6;
-
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 14;
-        ctx.strokeText(line, canvas.width / 2, yPos);
-
-        // Highlight alternate line color
-        ctx.fillStyle = index === 0 ? '#ffffff' : subColor;
-        ctx.fillText(line, canvas.width / 2, yPos);
-      });
-      ctx.restore();
-
-      // Bottom High-CTR Accent Bar
-      ctx.fillStyle = badgeBg;
-      ctx.fillRect(0, canvas.height - 24, canvas.width, 24);
-    }
-
-    function grabThumbnail() {
-      const url = document.getElementById('ytUrl').value.trim();
-      let videoId = '';
-      if (url.includes('v=')) {
-        videoId = url.split('v=')[1].split('&')[0];
-      } else if (url.includes('youtu.be/')) {
-        videoId = url.split('youtu.be/')[1].split('?')[0];
-      } else if (url.includes('shorts/')) {
-        videoId = url.split('shorts/')[1].split('?')[0];
-      }
-
-      if (videoId) {
-        const imgUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-        document.getElementById('grabbedImg').src = imgUrl;
-        document.getElementById('hdDownloadLink').href = imgUrl;
-        document.getElementById('grabResult').style.display = 'block';
-      } else {
-        alert('Please enter a valid YouTube or Shorts link.');
-      }
+      // Update thumbnail defaults
+      document.getElementById('thumbTextMain').value = topic.substring(0, 18).toUpperCase();
+      renderCanvas();
     }
 
     function copyBox(id) {
-      navigator.clipboard.writeText(document.getElementById(id).innerText);
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text);
       alert('Copied to clipboard!');
     }
 
-    function downloadCanvas() {
+    function renderCanvas() {
       const canvas = document.getElementById('thumbCanvas');
-      const a = document.createElement('a');
-      a.download = 'high-ctr-thumbnail.png';
-      a.href = canvas.toDataURL('image/png');
-      a.click();
+      const ctx = canvas.getContext('2d');
+      const mainText = document.getElementById('thumbTextMain').value || 'CREATOR';
+      const subText = document.getElementById('thumbTextSub').value || 'STUDIO';
+      const theme = document.getElementById('canvasTheme').value;
+      const badge = document.getElementById('badgeSelect').value;
+
+      // Background gradient
+      let grad = ctx.createLinearGradient(0, 0, 1280, 720);
+      if (theme === 'crimson') {
+        grad.addColorStop(0, '#1a0505');
+        grad.addColorStop(1, '#050101');
+      } else if (theme === 'cyber') {
+        grad.addColorStop(0, '#0a0d24');
+        grad.addColorStop(1, '#02040a');
+      } else if (theme === 'gold') {
+        grad.addColorStop(0, '#241a05');
+        grad.addColorStop(1, '#0a0802');
+      } else {
+        grad.addColorStop(0, '#051f14');
+        grad.addColorStop(1, '#020a06');
+      }
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // Glow circle
+      let glow = ctx.createRadialGradient(900, 360, 20, 900, 360, 450);
+      if (theme === 'crimson') glow.addColorStop(0, 'rgba(239, 68, 68, 0.35)');
+      else if (theme === 'cyber') glow.addColorStop(0, 'rgba(99, 102, 241, 0.35)');
+      else if (theme === 'gold') glow.addColorStop(0, 'rgba(234, 179, 8, 0.35)');
+      else glow.addColorStop(0, 'rgba(16, 185, 129, 0.35)');
+      glow.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, 1280, 720);
+
+      // Badge
+      ctx.fillStyle = '#ef4444';
+      if (theme === 'cyber') ctx.fillStyle = '#6366f1';
+      if (theme === 'gold') ctx.fillStyle = '#eab308';
+      if (theme === 'emerald') ctx.fillStyle = '#10b981';
+      ctx.fillRect(80, 120, 200, 50);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 24px Montserrat, sans-serif';
+      ctx.fillText(badge, 100, 155);
+
+      // Main Bold Text
+      ctx.font = '900 86px Montserrat, sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(mainText, 80, 300);
+
+      // Sub Yellow Text
+      ctx.fillStyle = '#facc15';
+      ctx.fillText(subText, 80, 410);
+
+      // Decorative border
+      ctx.lineWidth = 12;
+      ctx.strokeStyle = ctx.fillStyle;
+      ctx.strokeRect(0, 0, 1280, 720);
+    }
+
+    function downloadThumbnail() {
+      const canvas = document.getElementById('thumbCanvas');
+      const link = document.createElement('a');
+      link.download = 'youtube-thumbnail-4k.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
     }
 
     window.onload = function() {
-      drawCanvas();
+      generateAll();
     };
   </script>
 </body>
